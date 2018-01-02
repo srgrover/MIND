@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block content %}
+    <div style="margin-top: 70.5px;"></div>
+    <div class="title-box bg-primary">
+        <div class="container pull-right">
+            <a href="#" class="btn btn-primary">Guardados</a>
+            <a href="#" class="btn btn-primary">Archivados</a>
+            <a href="#" class="btn btn-primary">Favoritos</a>
+        </div>
+    </div>
     <div class="container">
         <div class="row col-md-12">
             <table class="points_table table-hover">
@@ -39,7 +47,7 @@
 
                 <tbody class="points_table_scrollbar">
                 {% for objeto in objetos %}
-                    <tr class="odd">
+                    <tr>
                         <td>
                             <div class="ckbox">
                                 <input type="checkbox" id="check{{ objeto.id }}" />
@@ -47,8 +55,8 @@
                             </div>
                         </td>
                         <td>
-                            <a href="javascript:;" class="star">
-                                <i class="fa fa-star-o"></i>
+                            <a href="javascript:;" class="star {% if objeto.favorito %}star-checked{% endif %}">
+                                <i class="fa fa-star"></i>
                             </a>
                         </td>
                         <td class="col-xs-3 col-md-3 col-lg-3">{{ objeto.nombre }}</td>
@@ -57,7 +65,7 @@
                         <td class="col-xs-2 col-md-2 col-lg-2">{{ objeto.fecha|date("d/m/Y") }}</td>
                     </tr>
                 {% else %}
-                    <tr class="odd">
+                    <tr>
                         <td colspan="6">
                             <h1>No hay datos</h1>
                         </td>

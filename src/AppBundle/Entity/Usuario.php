@@ -107,6 +107,13 @@ class Usuario implements UserInterface, \Serializable {
     protected $imagenPerfil;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Objeto", mappedBy="usuario")
+     *
+     * @var Objeto
+     */
+    protected $objetos;
+
+    /**
      * @ORM\Column(type="boolean", nullable=false)
      *
      * @var boolean

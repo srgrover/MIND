@@ -51,6 +51,13 @@ class Objeto {
     protected $fecha;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Usuario", inversedBy="objetos")
+     *
+     * @var Usuario
+     */
+    protected $usuario;
+
+    /**
      * @return int
      */
     public function getId()

@@ -29,22 +29,15 @@
                         </li>
                     </ul>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="#" class="btn btn-primary">Entrar</a>
+                        <a href="{{ path('entrar') }}" class="btn btn-primary">Entrar</a>
                         <a href="#" class="btn btn-info">Registrarse</a>
                     </div>
                 </div>
             </nav>
         </header>
     {% endblock %}
-    <div style="margin-top: 70.5px;"></div>
-    <div class="title-box bg-primary">
-        <div class="container pull-right">
-            <a href="#" class="btn btn-primary">Guardados</a>
-            <a href="#" class="btn btn-primary">Archivados</a>
-            <a href="#" class="btn btn-primary">Favoritos</a>
-        </div>
-    </div>
-    <div class="container">
+
+    <section class="container-fluid" style="margin: 0; padding: 0;">
         {% if app.session.flashBag.has('estado') %}
             {% set mensajes = app.session.flashBag.get('estado') %}
             {% for mensaje in mensajes %}
@@ -65,5 +58,5 @@
         {% endif %}
 
         {% block content %}{% endblock %}
-    </div>
+    </section>
 {% endblock %}
