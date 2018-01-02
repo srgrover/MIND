@@ -1,17 +1,19 @@
 <?php
 namespace AppBundle\Entity;
 //use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+//use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
+ * @ORM\Table(name="Usuario")
  */
-class Usuario implements UserInterface, \Serializable {
+class Usuario extends BaseUser {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @var integer
      */
@@ -24,29 +26,29 @@ class Usuario implements UserInterface, \Serializable {
      */
     protected $admin = false;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Assert\NotBlank(
-     *     message = "El email no puede estar vacío"
-     * )
-     * @Assert\Email(
-     *     message = "El email {{ value }} no es válido.",
-     * )
-     */
-    protected $email;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(type="string", unique=true, nullable=false)
+//     * @Assert\NotBlank(
+//     *     message = "El email no puede estar vacío"
+//     * )
+//     * @Assert\Email(
+//     *     message = "El email {{ value }} no es válido.",
+//     * )
+//     */
+//    protected $email;
 
-    /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\Length(
-     *     min = 8,
-     *     minMessage = "La contraseña debe tener como mínimo 8 caracteres"
-     * )
-     *
-     * @var string
-     */
-    protected $password;
+//    /**
+//     * @ORM\Column(type="string", nullable=false)
+//     * @Assert\Length(
+//     *     min = 8,
+//     *     minMessage = "La contraseña debe tener como mínimo 8 caracteres"
+//     * )
+//     *
+//     * @var string
+//     */
+//    protected $password;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -119,6 +121,12 @@ class Usuario implements UserInterface, \Serializable {
      * @var boolean
      */
     protected $estado = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->roles = array('ROLE_USER');
+    }
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -215,6 +223,7 @@ class Usuario implements UserInterface, \Serializable {
 
     /**
      * @param string $password
+     * @return $this|\FOS\UserBundle\Model\UserInterface|void
      */
     public function setPassword($password)
     {
@@ -263,6 +272,7 @@ class Usuario implements UserInterface, \Serializable {
 
     /**
      * @param string $email
+     * @return $this|\FOS\UserBundle\Model\UserInterface|void
      */
     public function setEmail($email)
     {
@@ -374,17 +384,7 @@ class Usuario implements UserInterface, \Serializable {
     {
         $this->activacion = $activacion;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-//        $this->viajes = new ArrayCollection();
-//        $this->rutinas = new ArrayCollection();
-//        $this->notificacion = new ArrayCollection();
-//        $this->emisor = new ArrayCollection();
-//        $this->receptor = new ArrayCollection();
-    }
+
     /**
      * Get estado
      *
