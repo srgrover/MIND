@@ -1,0 +1,50 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/seguridad.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/table.js') }}"></script>
+{% endblock %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+
+<div class="login">
+    <div class="login-screen">
+        <div class="app-title">
+            <h1>MIND</h1>
+        </div>
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <div class="login-form">
+                <div class="control-group">
+                    <input type="email" class="login-field" id="username" name="_username" placeholder="Correo electronico" value="{{ last_username }}" required="required" />
+                </div>
+
+                <div class="control-group">
+                    <input type="password" id="password" name="_password" class="login-field" value="" placeholder="Contraseña" required="required" />
+                </div>
+
+                <button class="btn btn-primary btn-large btn-block" id="_submit" name="_submit">
+                    <i class="fa fa-sign-in"></i>
+                    {{ 'security.login.submit'|trans }}
+                </button>
+                <div class="input-group">
+                    <div class="ckbox">
+                        <input type="checkbox" class="ckbox" id="remember_me" name="_remember_me" value="on" style="width: 25px;" />
+                        <label for="remember_me"></label>
+                    </div>
+                    <label for="remember_me" style="margin-top: 7px;font-size: 13px;color: #555;">{{ 'security.login.remember_me'|trans }}</label>
+                </div>
+                <a class="login-link" href="#">¿Has perdido tu contraseña?</a>
+            </div>
+        </form>
+    </div>
+</div>

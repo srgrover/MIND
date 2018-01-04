@@ -1,9 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-//use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-//use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
@@ -26,56 +24,17 @@ class Usuario extends BaseUser {
      */
     protected $admin = false;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(type="string", unique=true, nullable=false)
-//     * @Assert\NotBlank(
-//     *     message = "El email no puede estar vacío"
-//     * )
-//     * @Assert\Email(
-//     *     message = "El email {{ value }} no es válido.",
-//     * )
-//     */
-//    protected $email;
-
-//    /**
-//     * @ORM\Column(type="string", nullable=false)
-//     * @Assert\Length(
-//     *     min = 8,
-//     *     minMessage = "La contraseña debe tener como mínimo 8 caracteres"
-//     * )
-//     *
-//     * @var string
-//     */
-//    protected $password;
-
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=255)
      *
-     * @var string
-     */
-    protected $token;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @var \DateTime
-     */
-    protected $tokenValidity;
-
-    /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank(
-     *     message = "El nombre no puede estar vacío"
+     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=3,
+     *     max=255,
+     *     minMessage="The name is too short.",
+     *     maxMessage="The name is too long.",
+     *     groups={"Registration", "Profile"}
      * )
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Un nombre no puede contener un dígito"
-     * )
-     *
-     * @var string
      */
     protected $nombre;
 
@@ -93,6 +52,20 @@ class Usuario extends BaseUser {
      * @var string
      */
     protected $apellidos;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string
+     */
+    protected $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    protected $tokenValidity;
 
     /**
      * @ORM\Column(type="date", nullable=false)

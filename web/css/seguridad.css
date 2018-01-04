@@ -49,6 +49,10 @@ input:focus {
     box-shadow: none;
 }
 
+.ckbox input[type="checkbox"]:checked + label:after {
+    top: 3px;
+}
+
 .btn {
     border: 2px solid transparent;
     background: #3498DB;
@@ -64,6 +68,7 @@ input:focus {
     display: block;
     width: 250px;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .btn:hover {
