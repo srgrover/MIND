@@ -24,32 +24,32 @@ class Usuario extends BaseUser {
      */
     protected $admin = false;
 
+    /*      * @Assert\NotBlank(message="Por favor, introduce tu nombre.", groups={"Registration", "Profile"})*/
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=3,
      *     max=255,
-     *     minMessage="The name is too short.",
-     *     maxMessage="The name is too long.",
+     *     minMessage="El nombre es demasiado corto. Introduce como mínimo 3 caracteres.",
+     *     maxMessage="El nombre es demasiado largo, no debe sobrepasar los 255 caracteres.",
      *     groups={"Registration", "Profile"}
      * )
      */
-    protected $nombre;
+    protected $name;
 
+    /*     * @Assert\NotBlank(message="Por favor, introduce al menos un apellido.", groups={"Registration", "Profile"})
+*/
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank(
-     *     message = "Los apellidos no pueden estar vacíos"
-     * )
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="El apellido no puede contener un dígito"
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @var string
+     * @Assert\Length(
+     *     min=3,
+     *     max=255,
+     *     minMessage="El/los apellido/s son demasiado cortos",
+     *     maxMessage="El/los apellido/s son demasiado largos",
+     *     groups={"Registration", "Profile"}
+     * )
      */
     protected $apellidos;
 
@@ -68,7 +68,7 @@ class Usuario extends BaseUser {
     protected $tokenValidity;
 
     /**
-     * @ORM\Column(type="date", nullable=false)
+     * @ORM\Column(type="date", nullable=true)
      *
      * @var /date
      */
@@ -80,6 +80,13 @@ class Usuario extends BaseUser {
      * @var string
      */
     protected $imagenPerfil;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    protected $activacion;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Objeto", mappedBy="usuario")
@@ -100,13 +107,6 @@ class Usuario extends BaseUser {
         parent::__construct();
         $this->roles = array('ROLE_USER');
     }
-
-    /**
-     * @ORM\Column(type="datetime", nullable=false)
-     *
-     * @var \DateTime
-     */
-    protected $activacion;
 
     public function getUsername()
     {
@@ -187,85 +187,19 @@ class Usuario extends BaseUser {
     }
 
     /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     * @return $this|\FOS\UserBundle\Model\UserInterface|void
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
-     * @param string $token
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
-
-    /**
      * @return mixed
      */
-    public function getTokenValidity()
+    public function getName()
     {
-        return $this->tokenValidity;
+        return $this->name;
     }
 
     /**
-     * @param mixed $tokenValidity
+     * @param mixed $name
      */
-    public function setTokenValidity($tokenValidity)
+    public function setName($name)
     {
-        $this->tokenValidity = $tokenValidity;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     * @return $this|\FOS\UserBundle\Model\UserInterface|void
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * @param string $nombre
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
+        $this->name = $name;
     }
 
     /**

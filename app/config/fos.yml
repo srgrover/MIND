@@ -8,7 +8,7 @@ fos_user:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
     registration:
-        confirmation:
-          enabled: true # change to true for required email confirmation
         form:
-            name: app_user_registration
+            type: acme_user_registration
+        confirmation:
+            enabled: true # change to true for required email confirmation
