@@ -24,10 +24,11 @@ class Usuario extends BaseUser {
      */
     protected $admin = false;
 
-    /*      * @Assert\NotBlank(message="Por favor, introduce tu nombre.", groups={"Registration", "Profile"})*/
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      *
+     * @Assert\NotBlank(message="Por favor, introduce tu nombre.", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=3,
      *     max=255,
@@ -38,11 +39,10 @@ class Usuario extends BaseUser {
      */
     protected $name;
 
-    /*     * @Assert\NotBlank(message="Por favor, introduce al menos un apellido.", groups={"Registration", "Profile"})
-*/
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      *
+     * @Assert\NotBlank(message="Por favor, introduce al menos un apellido.", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=3,
      *     max=255,

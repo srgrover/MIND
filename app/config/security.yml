@@ -21,8 +21,13 @@ security:
                 # if you are using Symfony < 2.8, use the following config instead:
                 # csrf_provider: form.csrf_provider
                 require_previous_session: false
-
-            logout:       true
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                always_use_default_target_path: false
+                default_target_path: /inicio
+            logout:
+                path: fos_user_security_logout
+                target: /login
             anonymous:    true
             remember_me:
                 secret:      "%secret%"

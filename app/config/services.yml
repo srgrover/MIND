@@ -38,10 +38,10 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    acme_user.registration.form.type:
-        class: Acme\UserBundle\Form\Type\RegistrationFormType
+    app.form.registration:
+        class: AppBundle\Form\Type\RegistrationFormType
         tags:
-            - { name: form.type, alias: acme_user_registration }
+            - { name: form.type, alias: app_user_registration }
 
 #    app.form.registration_complete:
 #        class: AppBundle\Form\EventListener\RegistrationConfirmListener
