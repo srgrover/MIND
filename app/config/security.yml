@@ -26,10 +26,11 @@ security:
 
     access_control:
         # RUTAS DE FOSUSERBUNDLE
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/registro, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/restaurar, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administracion/, role: ROLE_ADMIN }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/regsiter, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/, role: ROLE_USER }
 
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
