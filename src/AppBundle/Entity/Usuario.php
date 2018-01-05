@@ -54,20 +54,6 @@ class Usuario extends BaseUser {
     protected $apellidos;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @var string
-     */
-    protected $token;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @var \DateTime
-     */
-    protected $tokenValidity;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      *
      * @var /date
@@ -95,17 +81,10 @@ class Usuario extends BaseUser {
      */
     protected $objetos;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=false)
-     *
-     * @var boolean
-     */
-    protected $estado = false;
-
     public function __construct()
     {
         parent::__construct();
-        $this->roles = array('ROLE_USER');
+        //$this->roles = array('ROLE_USER');
     }
 
     public function getUsername()
@@ -133,7 +112,7 @@ class Usuario extends BaseUser {
 
     public function __toString()
     {
-        return $this->getNombre() . ' ' . $this->getApellidos();
+        return $this->getName() . ' ' . $this->getApellidos();
     }
 
     public function serialize()
@@ -249,34 +228,7 @@ class Usuario extends BaseUser {
     {
         $this->imagenPerfil = $imagenPerfil;
     }
-//    /**
-//     * @return string
-//     */
-//    public function getImagenFondo()
-//    {
-//        return $this->imagenFondo;
-//    }
-//    /**
-//     * @param string $imagenFondo
-//     */
-//    public function setImagenFondo($imagenFondo)
-//    {
-//        $this->imagenFondo = $imagenFondo;
-//    }
-    /**
-     * @return boolean
-     */
-    public function isEstado()
-    {
-        return $this->estado;
-    }
-    /**
-     * @param boolean $estado
-     */
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
-    }
+
     /**
      * @return \DateTime
      */
@@ -290,15 +242,5 @@ class Usuario extends BaseUser {
     public function setActivacion($activacion)
     {
         $this->activacion = $activacion;
-    }
-
-    /**
-     * Get estado
-     *
-     * @return boolean
-     */
-    public function getEstado()
-    {
-        return $this->estado;
     }
 }

@@ -11,20 +11,17 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="entrar")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function entrarAction(Request $request)
     {
         //Si el usuario está logueado se redirecciona a la página principal
         if(is_object($this->getUser())){
-            return $this->redirect('homepage');
+            return $this->redirect('inicio');
+        }else{
+            return $this->redirect('login');
         }
-        $autenticationUtils = $this->get('security.authentication_utils');  //Utiles para autenticacion
-        $error = $autenticationUtils->getLastAuthenticationError();         //Capturamos el error
-        $lastUserName = $autenticationUtils->getLastUsername();             //Capturamos el usuario del error
-        return $this->render('seguridad/entrar.html.twig', [
-            'last_username' => $lastUserName,
-            'error' => $error
-        ]);
     }
 
     /**

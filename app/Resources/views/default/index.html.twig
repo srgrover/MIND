@@ -6,291 +6,363 @@
 
 {% block content %}
     <div style="margin-top: 70.5px;"></div>
-    <div class="title-box bg-primary">
-        <div class="container pull-right">
-            <a href="#" class="btn btn-primary">Guardados</a>
-            <a href="#" class="btn btn-primary">Archivados</a>
-            <a href="#" class="btn btn-primary">Favoritos</a>
-        </div>
-    </div>
-    <div class="container-fluid" style="padding: 0; margin: 0;">
-        <aside class="col-sm-4 col-md-4 col-lg-4">
-            <h1>aside for the user</h1>
-        </aside>
-
-        <div class="row col-md-8">
-            <table class="points_table table-hover">
-                <thead>
-                <tr>
-                    <th>
-                        <div class="ckbox">
-                        <input type="checkbox" id="check-all" />
-                        <label for="check-all"></label>
+    <div class="container-fluid">
+        <div class="row"></div>
+        <div class="row">
+            <div class="col col-sm-3 col-md-3 col-lg-3 bg-primary"></div>
+            <div class="col title-box bg-primary" >
+                <div class="container" style="padding: 0;">
+                    <a href="#" class="btn btn-primary">Guardados</a>
+                    <a href="#" class="btn btn-primary">Archivados</a>
+                    <a href="#" class="btn btn-primary">Favoritos</a>
+                </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col col-sm-3 col-md-3 col-lg-3" style="background-color: #16202f;">
+                <aside>
+                    <div class="container">
+                        <div class="row profile" style="margin-top: 0px;">
+                            <div class="col-md-12">
+                                <div class="profile-sidebar">
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <!-- SIDEBAR USERPIC -->
+                                    <div class="profile-userpic text-center">
+                                        <img src="https://www.brujulabike.com/uploads/images/conor2.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <!-- END SIDEBAR USERPIC -->
+                                    <!-- SIDEBAR USER TITLE -->
+                                    <div class="profile-usertitle">
+                                        <div class="profile-usertitle-name">
+                                            {{ app.user.name }} {{ app.user.apellidos }}
+                                        </div>
+                                        <div class="profile-usertitle-job">
+                                            {{ app.user.email }}
+                                        </div>
+                                    </div>
+                                    <!-- END SIDEBAR USER TITLE -->
+                                    <!-- SIDEBAR BUTTONS -->
+                                    {#<div class="profile-userbuttons">#}
+                                        {#<button type="button" class="btn btn-success btn-sm">Follow</button>#}
+                                        {#<button type="button" class="btn btn-danger btn-sm">Message</button>#}
+                                    {#</div>#}
+                                    <!-- END SIDEBAR BUTTONS -->
+                                    <!-- SIDEBAR MENU -->
+                                    <div class="profile-usermenu">
+                                        <ul class="nav">
+                                            <li class="active">
+                                                <a href="#">
+                                                    <i class="glyphicon glyphicon-home"></i>
+                                                    Overview </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="glyphicon glyphicon-user"></i>
+                                                    Account Settings </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank">
+                                                    <i class="glyphicon glyphicon-ok"></i>
+                                                    Tasks </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="glyphicon glyphicon-flag"></i>
+                                                    Help </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    <!-- END MENU -->
+                                </div>
+                            </div>
                         </div>
-                    </th>
-                    <th>
-                        <a href="javascript:;" class="star">
-                            <i class="fa fa-star"></i>
-                        </a>
-                    </th>
-                    <th class="col-xs-3 col-md-3 col-lg-3">
-                        <i class="fa fa-cube"></i>
-                        OBJETO
-                    </th>
-                    <th class="col-xs-4 col-md-4 col-lg-4">
-                        <i class="fa fa-map-marker"></i>
-                        UBICACION
-                    </th>
-                    <th class="col-xs-2 col-md-2 col-lg-2"></th>
-                    <th class="col-xs-2 col-md-2 col-lg-2">
-                        <i class="fa fa-calendar"></i>
-                        FECHA
-                    </th>
-                </tr>
-                </thead>
+                    </div>
 
-                <tbody class="points_table_scrollbar">
-                {% for objeto in objetos %}
+                    <br>
+                    <br>
+                </aside>
+            </div>
+            <div class="col" style="padding: 0;">
+                <table class="points_table table-hover">
+                    <thead>
                     <tr>
+                        <th>
+                            <div class="ckbox">
+                                <input type="checkbox" id="check-all" />
+                                <label for="check-all"></label>
+                            </div>
+                        </th>
+                        <th>
+                            <a href="javascript:;" class="star">
+                                <i class="fa fa-star"></i>
+                            </a>
+                        </th>
+                        <th class="col-xs-3 col-md-3 col-lg-3">
+                            <i class="fa fa-cube"></i>
+                            OBJETO
+                        </th>
+                        <th class="col-xs-4 col-md-4 col-lg-4">
+                            <i class="fa fa-map-marker"></i>
+                            UBICACION
+                        </th>
+                        <th class="col-xs-2 col-md-2 col-lg-2"></th>
+                        <th class="col-xs-2 col-md-2 col-lg-2">
+                            <i class="fa fa-calendar"></i>
+                            FECHA
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="points_table_scrollbar">
+                    {% for objeto in objetos %}
+                        <tr>
+                            <td>
+                                <div class="ckbox">
+                                    <input type="checkbox" id="check{{ objeto.id }}" />
+                                    <label for="check{{ objeto.id }}"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="star {% if objeto.favorito %}star-checked{% endif %}">
+                                    <i class="fa fa-star"></i>
+                                </a>
+                            </td>
+                            <td class="col-xs-3 col-md-3 col-lg-3">{{ objeto.nombre }}</td>
+                            <td class="col-xs-3 col-md-4 col-lg-4">{{ objeto.ubicacion }}</td>
+                            <td class="col-xs-2 col-md-2 col-lg-2"></td>
+                            <td class="col-xs-2 col-md-2 col-lg-2">{{ objeto.fecha|date("d/m/Y") }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">
+                                <h1>No hay datos</h1>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr class="odd">
                         <td>
                             <div class="ckbox">
-                                <input type="checkbox" id="check{{ objeto.id }}" />
-                                <label for="check{{ objeto.id }}"></label>
+                                <input type="checkbox" id="check1"/>
+                                <label for="check1"></label>
                             </div>
                         </td>
                         <td>
-                            <a href="javascript:;" class="star {% if objeto.favorito %}star-checked{% endif %}">
-                                <i class="fa fa-star"></i>
+                            <a href="javascript:;" class="star">
+                                <i class="fa fa-star-o"></i>
                             </a>
                         </td>
-                        <td class="col-xs-3 col-md-3 col-lg-3">{{ objeto.nombre }}</td>
-                        <td class="col-xs-3 col-md-4 col-lg-4">{{ objeto.ubicacion }}</td>
+                        <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
+                        <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
                         <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                        <td class="col-xs-2 col-md-2 col-lg-2">{{ objeto.fecha|date("d/m/Y") }}</td>
+                        <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="6">
-                            <h1>No hay datos</h1>
+
+                    <tr class="even">
+                        <td>
+                            <div class="ckbox">
+                                <input type="checkbox" id="check2"/>
+                                <label for="check2"></label>
+                            </div>
                         </td>
+                        <td>
+                            <a href="javascript:;" class="star">
+                                <i class="fa fa-star-o"></i>
+                            </a>
+                        </td>
+                        <td class="col-xs-3 col-md-3 col-lg-3">Gafas de sol bebida</td>
+                        <td class="col-xs-3 col-md-4 col-lg-4">Bolsa de aseo | Armario empotrado</td>
+                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
+                        <td class="col-xs-2 col-md-2 col-lg-2">15/09/2017</td>
                     </tr>
-                {% endfor %}
-                <tr class="odd">
-                    <td>
-                        <div class="ckbox">
-                        <input type="checkbox" id="check1"/>
-                        <label for="check1"></label>
-                        </div>
-                    </td>
-                    <td>
-                        <a href="javascript:;" class="star">
-                            <i class="fa fa-star-o"></i>
-                        </a>
-                    </td>
-                    <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
-                    <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
-                    <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                    <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
-                </tr>
 
-                <tr class="even">
-                    <td>
-                        <div class="ckbox">
-                            <input type="checkbox" id="check2"/>
-                            <label for="check2"></label>
-                        </div>
-                    </td>
-                    <td>
-                        <a href="javascript:;" class="star">
-                            <i class="fa fa-star-o"></i>
-                        </a>
-                    </td>
-                    <td class="col-xs-3 col-md-3 col-lg-3">Gafas de sol bebida</td>
-                    <td class="col-xs-3 col-md-4 col-lg-4">Bolsa de aseo | Armario empotrado</td>
-                    <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                    <td class="col-xs-2 col-md-2 col-lg-2">15/09/2017</td>
-                </tr>
+                    <tr class="odd">
+                        <td>
+                            <div class="ckbox">
+                                <input type="checkbox">
+                            </div>
+                        </td>
+                        <td>
+                            <a href="javascript:;" class="star">
+                                <i class="fa fa-star-o"></i>
+                            </a>
+                        </td>
+                        <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
+                        <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
+                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
+                        <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td>
-                        <div class="ckbox">
-                        <input type="checkbox">
-                        </div>
-                    </td>
-                    <td>
-                        <a href="javascript:;" class="star">
-                            <i class="fa fa-star-o"></i>
-                        </a>
-                    </td>
-                    <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
-                    <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
-                    <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                    <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
-                </tr>
+                    <tr class="even">
+                        <td>
+                            <div class="ckbox">
+                                <input type="checkbox">
+                            </div>
+                        </td>
+                        <td>
+                            <a href="javascript:;" class="star">
+                                <i class="fa fa-star-o"></i>
+                            </a>
+                        </td>
+                        <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
+                        <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
+                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
+                        <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
+                    </tr>
 
-                <tr class="even">
-                    <td>
-                        <div class="ckbox">
-                        <input type="checkbox">
-                        </div>
-                    </td>
-                    <td>
-                        <a href="javascript:;" class="star">
-                            <i class="fa fa-star-o"></i>
-                        </a>
-                    </td>
-                    <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
-                    <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
-                    <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                    <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-7">Test Points 5</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-7">Test Points 5</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">6</td>
+                        <td class="col-xs-7">Test Points 6</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">6</td>
-                    <td class="col-xs-7">Test Points 6</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">7</td>
+                        <td class="col-xs-7">Test Points 7</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">7</td>
-                    <td class="col-xs-7">Test Points 7</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">8</td>
+                        <td class="col-xs-7">Test Points 8</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">8</td>
-                    <td class="col-xs-7">Test Points 8</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">9</td>
+                        <td class="col-xs-7">Test Points 9</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">9</td>
-                    <td class="col-xs-7">Test Points 9</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-7">Test Points 10</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-7">Test Points 10</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">11</td>
+                        <td class="col-xs-7">Test Points 11</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">11</td>
-                    <td class="col-xs-7">Test Points 11</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">12</td>
+                        <td class="col-xs-7">Test Points 12</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">12</td>
-                    <td class="col-xs-7">Test Points 12</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">13</td>
+                        <td class="col-xs-7">Test Points 13</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">13</td>
-                    <td class="col-xs-7">Test Points 13</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">14</td>
+                        <td class="col-xs-7">Test Points 14</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">14</td>
-                    <td class="col-xs-7">Test Points 14</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">15</td>
+                        <td class="col-xs-7">Test Points 15</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">15</td>
-                    <td class="col-xs-7">Test Points 15</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">16</td>
+                        <td class="col-xs-7">Test Points 16</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">16</td>
-                    <td class="col-xs-7">Test Points 16</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">17</td>
+                        <td class="col-xs-7">Test Points 17</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">17</td>
-                    <td class="col-xs-7">Test Points 17</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="even">
+                        <td class="col-xs-1">18</td>
+                        <td class="col-xs-7">Test Points 18</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="even">
-                    <td class="col-xs-1">18</td>
-                    <td class="col-xs-7">Test Points 18</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
+                    <tr class="odd">
+                        <td class="col-xs-1">19</td>
+                        <td class="col-xs-7">Test Points 19</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
 
-                <tr class="odd">
-                    <td class="col-xs-1">19</td>
-                    <td class="col-xs-7">Test Points 19</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
-
-                <tr class="even">
-                    <td class="col-xs-1">20</td>
-                    <td class="col-xs-7">Test Points 20</td>
-                    <td class="col-xs-1">10</td>
-                    <td class="col-xs-1">0</td>
-                    <td class="col-xs-1">5</td>
-                    <td class="col-xs-1">1</td>
-                </tr>
-                </tbody>
-            </table>
+                    <tr class="even">
+                        <td class="col-xs-1">20</td>
+                        <td class="col-xs-7">Test Points 20</td>
+                        <td class="col-xs-1">10</td>
+                        <td class="col-xs-1">0</td>
+                        <td class="col-xs-1">5</td>
+                        <td class="col-xs-1">1</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+
+
+
+
+
 
 {% endblock %}
