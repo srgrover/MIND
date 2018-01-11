@@ -196,8 +196,9 @@ a.navbar-brand {
 
 /* Profile sidebar */
 .profile-sidebar {
-    padding: 20px 0 10px 0;
+    padding-top: 20px;
     background-color: #16202f;
+
 }
 
 .profile-userpic {
@@ -233,7 +234,7 @@ a.navbar-brand {
 
 .profile-usertitle-job {
     text-transform: uppercase;
-    color: #5b9bd1;
+    color: #18bc9c;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 15px;
@@ -261,12 +262,11 @@ a.navbar-brand {
 }
 
 .profile-usermenu ul {
-    background-color: #ccd2d3;
-    border-radius: 3px;
+    background-color: rgba(255,255,255, 0.1);
 }
 
 .profile-usermenu ul li {
-    border-bottom: 1px solid #f0f4f7;
+    border-bottom: 1px solid rgba(255,255,255, 0.2);
     width: 100%;
 }
 
@@ -290,7 +290,7 @@ a.navbar-brand {
 
 .profile-usermenu ul li a:hover {
     background-color: #fafcfd;
-    color: #5b9bd1;
+    color: #18bc9c;
 }
 
 .profile-usermenu ul li.active {
@@ -299,10 +299,10 @@ a.navbar-brand {
 }
 
 .profile-usermenu ul li.active a {
-    color: #5b9bd1;
+    color: #18bc9c;
     background-color: #f6f9fb;
-    border-left: 2px solid #5b9bd1;
-    margin-left: -2px;
+    border-left: 4px solid #18bc9c;
+    margin-left: 0;
 }
 
 /* Profile Content */
