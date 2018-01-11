@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Form\EventListener\RegistrationConfirmListener;
 use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,10 +41,12 @@ class RegistrationFormType extends AbstractType
                 'options' => [
                     'translation_domain' => 'FOSUserBundle'
                 ],
+                'first_name' => "pass",
                 'first_options' => [
                     'label' => false,
                     'attr' => ['placeholder' => 'form.password'],
                 ],
+                'second_name' => "repeat",
                 'second_options' => [
                     'label' => false,
                     'attr' => ['placeholder' => 'form.password_confirmation'],

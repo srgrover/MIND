@@ -1,8 +1,48 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/seguridad.css') }}">
+{% endblock %}
+
+<div class="login">
+    <div class="login-screen">
+        <div class="app-title">
+            <h4>REGISTRO</h4>
+            <h1>MIND</h1>
+        </div>
+        <hr>
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            <div class="login-form">
+                <div class="control-group">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="control-group">
+                    {{ form_row(form.apellidos) }}
+                </div>
+                <div class="control-group">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="control-group">
+                    {{ form_row(form.username) }}
+                </div>
+                <div class="control-group">
+                    {{ form_row(form.plainPassword.pass) }}
+                </div>
+                <div class="control-group">
+                    {{ form_row(form.plainPassword.repeat) }}
+                </div>
+            </div>
+
+            <div>
+                <input class="btn btn-primary btn-large btn-block" type="submit" value="{{ 'registration.submit'|trans }}" />
+            </div>
+        {{ form_end(form) }}
     </div>
-{{ form_end(form) }}
+
+    <div class="login-or">
+        <hr class="registro-hr-or">
+        <span class="registro-span-or">o</span>
+    </div>
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary btn-large btn-block">INICIA SESION</a>
+
+</div>

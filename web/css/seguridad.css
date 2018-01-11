@@ -82,6 +82,7 @@ input:focus {
     margin-top: 12px;
 }
 
+/* OR en registro y login*/
 .login-or {
     position: relative;
     font-size: 18px;
@@ -91,7 +92,7 @@ input:focus {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.span-or {
+.span-or, .registro-span-or {
     display: block;
     position: absolute;
     left: 50%;
@@ -101,9 +102,17 @@ input:focus {
     width: 50px;
     text-align: center;
 }
-.hr-or {
+.hr-or, .registro-hr-or {
     background-color: #cdcdcd;
     height: 1px;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
+}
+
+.registro-span-or {
+    background-color: #3498db;
+    color: #FFFFFF;
+}
+.registro-hr-or {
+    background-color: #FFFFFF;
 }
