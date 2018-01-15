@@ -14,24 +14,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">
+                        <li class="nav-item {% if ruta == 'inicio' %}active{% endif %}">
+                            <a class="nav-link" href="{{ path('inicio') }}">
                                 <i class="fa fa-home"></i>
                                 Inicio
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                        <li class="nav-item {% if ruta == 'ayuda' %}active{% endif %}">
+                            <a class="nav-link" href="#">Ayuda</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                        <li class="nav-item {% if ruta == 'contacto' %}active{% endif %}">
+                            <a class="nav-link" href="#">Contacto</a>
                         </li>
                     </ul>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ path('entrar') }}" class="btn btn-primary">Entrar</a>
-                        <a href="#" class="btn btn-info">Registrarse</a>
-                    </div>
                 </div>
             </nav>
         </header>
