@@ -2,6 +2,10 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/table.js') }}"></script>
+    <script>
+        var URL = "{{ app.request.getSchemeAndHttpHost() }}";
+    </script>
+    <script src="{{ asset('js/favoritos.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -76,10 +80,10 @@
                     <a href="#" class="btn btn-primary">Archivados</a>
                     <a href="#" class="btn btn-primary">Favoritos</a>
                     <!-- Button to Open the Modal -->
-                    <button type="button" class="btn btn-primary pull-right text-success" data-toggle="modal" data-target="#myModal">
+                    <a href="{{ path('add_objeto') }}" class="btn btn-primary pull-right btn-objeto">
                         <i class="fa fa-plus"></i>
                         Agregar Nuevo
-                    </button>
+                    </a>
 
                     <!-- The Modal -->
                     <div class="modal fade" id="myModal">
@@ -148,7 +152,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="javascript:;" class="star {% if objeto.favorito %}star-checked{% endif %}">
+                                <a href="javascript:;" id="star-{{ objeto.id }}" class="star {% if objeto.favorito %}star-checked{% endif %}">
                                     <i class="fa fa-star"></i>
                                 </a>
                             </td>
@@ -160,223 +164,10 @@
                     {% else %}
                         <tr>
                             <td colspan="6">
-                                <h1>No hay datos</h1>
+                                <h2>No hay datos</h2>
                             </td>
                         </tr>
                     {% endfor %}
-                    <tr class="odd">
-                        <td>
-                            <div class="ckbox">
-                                <input type="checkbox" id="check1"/>
-                                <label for="check1"></label>
-                            </div>
-                        </td>
-                        <td>
-                            <a href="javascript:;" class="star">
-                                <i class="fa fa-star-o"></i>
-                            </a>
-                        </td>
-                        <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
-                        <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
-                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                        <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td>
-                            <div class="ckbox">
-                                <input type="checkbox" id="check2"/>
-                                <label for="check2"></label>
-                            </div>
-                        </td>
-                        <td>
-                            <a href="javascript:;" class="star">
-                                <i class="fa fa-star-o"></i>
-                            </a>
-                        </td>
-                        <td class="col-xs-3 col-md-3 col-lg-3">Gafas de sol bebida</td>
-                        <td class="col-xs-3 col-md-4 col-lg-4">Bolsa de aseo | Armario empotrado</td>
-                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                        <td class="col-xs-2 col-md-2 col-lg-2">15/09/2017</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td>
-                            <div class="ckbox">
-                                <input type="checkbox">
-                            </div>
-                        </td>
-                        <td>
-                            <a href="javascript:;" class="star">
-                                <i class="fa fa-star-o"></i>
-                            </a>
-                        </td>
-                        <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
-                        <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
-                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                        <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td>
-                            <div class="ckbox">
-                                <input type="checkbox">
-                            </div>
-                        </td>
-                        <td>
-                            <a href="javascript:;" class="star">
-                                <i class="fa fa-star-o"></i>
-                            </a>
-                        </td>
-                        <td class="col-xs-3 col-md-3 col-lg-3">Alfombillas ratón</td>
-                        <td class="col-xs-3 col-md-4 col-lg-4">Maletin gris | ABajo la estanteria</td>
-                        <td class="col-xs-2 col-md-2 col-lg-2"></td>
-                        <td class="col-xs-2 col-md-2 col-lg-2">28/12/2017</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-7">Test Points 5</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">6</td>
-                        <td class="col-xs-7">Test Points 6</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">7</td>
-                        <td class="col-xs-7">Test Points 7</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">8</td>
-                        <td class="col-xs-7">Test Points 8</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">9</td>
-                        <td class="col-xs-7">Test Points 9</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-7">Test Points 10</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">11</td>
-                        <td class="col-xs-7">Test Points 11</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">12</td>
-                        <td class="col-xs-7">Test Points 12</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">13</td>
-                        <td class="col-xs-7">Test Points 13</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">14</td>
-                        <td class="col-xs-7">Test Points 14</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">15</td>
-                        <td class="col-xs-7">Test Points 15</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">16</td>
-                        <td class="col-xs-7">Test Points 16</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">17</td>
-                        <td class="col-xs-7">Test Points 17</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">18</td>
-                        <td class="col-xs-7">Test Points 18</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="odd">
-                        <td class="col-xs-1">19</td>
-                        <td class="col-xs-7">Test Points 19</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
-
-                    <tr class="even">
-                        <td class="col-xs-1">20</td>
-                        <td class="col-xs-7">Test Points 20</td>
-                        <td class="col-xs-1">10</td>
-                        <td class="col-xs-1">0</td>
-                        <td class="col-xs-1">5</td>
-                        <td class="col-xs-1">1</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>

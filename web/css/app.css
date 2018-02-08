@@ -1,4 +1,7 @@
 /* CENTAR LOGO */
+body, html{
+    font-family: Roboto, sans-serif;
+}
 
 a.navbar-brand {
     transform: translateX(-50%);
@@ -10,6 +13,9 @@ a.navbar-brand {
     margin-top: 5px;
 }
 
+.bg-dark{
+    background-color: #1FC8E3 !important;
+}
 
 /* CONTENT */
     /* TITLE */
@@ -27,7 +33,15 @@ a.navbar-brand {
     border-radius: 0;
 }
 
+.btn-objeto{
+    background-color: #00C853;
+    border: 1px solid #00C853;
+}
 
+.btn-objeto:hover{
+    background-color: #00A653;
+    border: 1px solid #00A653;
+}
 
 
 
@@ -61,7 +75,8 @@ a.navbar-brand {
 }
 
 .points_table thead{
-    background: #d91f2d;
+    background: #2196F3;
+    background: linear-gradient(to right, #2196F3 , #1DE9D8);
     color: #fff;
 }
 
@@ -107,7 +122,8 @@ a.navbar-brand {
 
 .points_table_scrollbar::-webkit-scrollbar-thumb{
     border-radius: 10px;
-    background-color: #D62929;
+    background: #2196F3;
+    background: linear-gradient(to right, #2196F3 , #1DE9B6);
     background-image: -webkit-linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4) 50%, transparent, transparent)
 }
 
@@ -234,7 +250,7 @@ a.navbar-brand {
 
 .profile-usertitle-job {
     text-transform: uppercase;
-    color: #18bc9c;
+    color: #2196F3;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 15px;
@@ -290,7 +306,7 @@ a.navbar-brand {
 
 .profile-usermenu ul li a:hover {
     background-color: #fafcfd;
-    color: #18bc9c;
+    color: #2196F3;
 }
 
 .profile-usermenu ul li.active {
@@ -299,9 +315,9 @@ a.navbar-brand {
 }
 
 .profile-usermenu ul li.active a {
-    color: #18bc9c;
+    color: #2196F3;
     background-color: #f6f9fb;
-    border-left: 4px solid #18bc9c;
+    border-left: 4px solid #2196F3;
     margin-left: 0;
 }
 

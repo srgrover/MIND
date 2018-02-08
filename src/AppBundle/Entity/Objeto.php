@@ -41,7 +41,7 @@ class Objeto {
      *
      * @var boolean
      */
-    protected $favorito;
+    protected $favorito = 0;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -136,4 +136,21 @@ class Objeto {
     {
         $this->fecha = $fecha;
     }
+
+    /**
+     * @return Usuario
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param Usuario $usuario
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+    }
+
 }

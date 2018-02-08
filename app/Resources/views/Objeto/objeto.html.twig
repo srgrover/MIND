@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/table.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="col-lg-6 box-form box-default">
+        <h1>Nuevo objeto a recordar</h1>
+        <hr />
+        {{ form_start(formulario) }}
+        {{ form_widget(formulario) }}
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <a href="{{ path('inicio') }}" class="btn btn-primary">
+                    <i class="fa fa-long-arrow-left"></i>
+                    Volver al perfil
+                </a>
+                <button type="submit" name="enviar" class="btn btn-success">
+                    <i class="fa fa-check"></i>
+                    Guardar
+                </button>
+            </div>
+        </div>
+        {{ form_end(formulario) }}
+    </div>
+{% endblock %}
