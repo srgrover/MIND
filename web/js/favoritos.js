@@ -1,14 +1,14 @@
-$(document).ready(function () {
-    $(".star").unbind("click").click(function () {
-        var idObjeto = $(this).attr("id");
-        var id = idObjeto.split("-")[1];
+$(".btn-star").unbind("click").click(function () {
+    $.ajax({
+        url: URL+'/favorito',
+        type: 'POST',
+        data: {fav: $(this).attr("data-fav")}
+    });
+});
 
-       $.ajax({
-           url: URL+'/objeto/'+id+'/favorito',
-           type: 'POST',
-           success: function () {
-               $(this).addClass("star-checked")
-           }
-       });
+$("#todos-star").unbind("click").click(function () {
+    $.ajax({
+        url: URL+'/favoritos',
+        type: 'POST'
     });
 });

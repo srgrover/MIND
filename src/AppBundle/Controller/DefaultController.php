@@ -116,17 +116,54 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/objeto/{id}/favorito", name="objeto_favorito")
-     * @param Objeto $id
+     * @Route("/favorito", name="objeto_favorito", methods={"POST"})
      */
-    public function peticionViajeAction(Objeto $id){
+    public function favoritoAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $objeto = $em->getRepository('AppBundle:Objeto')
-            ->findOneBy(['id' => $id]);
+            ->findOneBy([
+                'id' => $request->get('fav'),
+                'usuario' => $this->getUser()
+            ]);
         try{
-            $objeto->setFavorito(1);
+            if($objeto->isFavorito()){
+                $objeto->setFavorito(0);
+            }else{
+                $objeto->setFavorito(1);
+            }
+
             $em->flush();
-            $this->addFlash('estado', 'Añadido a favoritos');
+        }catch (Exception $exception){
+            $this->addFlash('error', 'Hubo algún problema al procesar la petición');
+        }
+        die();
+    }
+
+    /**
+     * @Route("/favoritos", name="todos_favoritos", methods={"POST"})
+     */
+    public function favoritosAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $objetos = $em->getRepository('AppBundle:Objeto')
+            ->findBy([
+                'usuario' => $this->getUser()
+            ]);
+        try{
+            $todos_fav = true;
+            foreach($objetos as $objeto) {
+                if(!$objeto->isFavorito()){
+                    $objeto->setFavorito(1);
+                    $todos_fav = false;
+                }
+            }
+            if($todos_fav){
+                foreach($objetos as $objeto) {
+                    $objeto->setFavorito(0);
+                    $todos_fav = true;
+                }
+            }
+
+            $em->flush();
         }catch (Exception $exception){
             $this->addFlash('error', 'Hubo algún problema al procesar la petición');
         }

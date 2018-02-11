@@ -122,9 +122,22 @@
                             </div>
                         </th>
                         <th>
-                            <a href="javascript:;" class="star">
+                            {% set fv = true %}
+                            <button id="todos-star" class="star
+                            {% for obj in objetos %}
+                                {% if obj.usuario == app.user %}
+                                    {% if not obj.favorito %}
+                                        {% set fv = false %}
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if fv %}
+                                    star-checked
+                                {% endif %}
+                            {% endfor %}
+                            ">
                                 <i class="fa fa-star"></i>
-                            </a>
+                            </button>
                         </th>
                         <th class="col-xs-3 col-md-3 col-lg-3">
                             <i class="fa fa-cube"></i>
@@ -152,9 +165,9 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="javascript:;" id="star-{{ objeto.id }}" class="star {% if objeto.favorito %}star-checked{% endif %}">
+                                <button class="btn-star star {% if objeto.favorito %}star-checked{% endif %}" data-fav="{{ objeto.id }}">
                                     <i class="fa fa-star"></i>
-                                </a>
+                                </button>
                             </td>
                             <td class="col-xs-3 col-md-3 col-lg-3">{{ objeto.nombre }}</td>
                             <td class="col-xs-3 col-md-4 col-lg-4">{{ objeto.ubicacion }}</td>

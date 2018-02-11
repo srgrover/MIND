@@ -149,6 +149,13 @@ a.navbar-brand {
 .star.star-checked:hover {
     color: #0050f0;
 }
+.btn-star, #todos-star{
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
 
 
 
