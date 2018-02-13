@@ -1,11 +1,11 @@
 {% extends 'layout.html.twig' %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/table.js') }}"></script>
+    <script src="{{ asset('js/favoritos.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         var URL = "{{ app.request.getSchemeAndHttpHost() }}";
     </script>
-    <script src="{{ asset('js/favoritos.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -112,11 +112,11 @@
                 </div>
             </div>
             <div class="col col-md-12" style="padding: 0;">
-                <table class="points_table table-hover col-md-12" >
+                <table class="points_table table-hover col-sm-12 col-md-12 col-lg-12" >
                     <thead>
                     <tr>
                         <th>
-                            <div class="ckbox">
+                            <div class="ckbox-all">
                                 <input type="checkbox" id="check-all" />
                                 <label for="check-all"></label>
                             </div>
@@ -177,7 +177,10 @@
                     {% else %}
                         <tr>
                             <td colspan="6">
-                                <h2>No hay datos</h2>
+                                <h2>No hay objetos guardados</h2>
+                                <h2>
+                                    <small>Añade un objeto ahora</small>
+                                </h2>
                             </td>
                         </tr>
                     {% endfor %}
@@ -187,11 +190,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
 {% endblock %}

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
+
 /* CENTAR LOGO */
 body, html{
     font-family: Roboto, sans-serif;
@@ -8,9 +10,9 @@ a.navbar-brand {
     left: 50%;
     position: absolute;
     padding: 0;
-    font: normal 50px/60px sans-serif;
+    font: normal 50px/60px 'Nanum Pen Script', sans-serif;
     color: #FFFFFF;
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 .bg-dark{
@@ -57,7 +59,7 @@ a.navbar-brand {
 }
 
 .points_table tbody {
-    height: 562px;
+    height: 380px;
     overflow-y: auto;
     width: 100%;
 }
@@ -157,28 +159,22 @@ a.navbar-brand {
     cursor: pointer;
 }
 
-
-
-
-
-
-
-/*CHECKBOXES*/
-.ckbox {
+/* CHECKBOXES */
+.ckbox, .ckbox-all {
     position: relative;
 
 }
-.ckbox input[type="checkbox"] {
+.ckbox input[type="checkbox"], .ckbox-all input[type="checkbox"] {
     opacity: 0;
 }
-.ckbox label {
+.ckbox label, .ckbox-all label {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
 }
-.ckbox label:before {
+.ckbox label:before, .ckbox-all label:before {
     content: '';
     top: 7px;
     left: 0;
@@ -190,11 +186,11 @@ a.navbar-brand {
     border: 1px solid #bbb;
     background-color: #fff;
 }
-.ckbox input[type="checkbox"]:checked + label:before {
+.ckbox input[type="checkbox"]:checked + label:before, .ckbox-all input[type="checkbox"]:checked + label:before {
     border-color: #2BBCDE;
     background-color: #2BBCDE;
 }
-.ckbox input[type="checkbox"]:checked + label:after {
+.ckbox input[type="checkbox"]:checked + label:after, .ckbox-all input[type="checkbox"]:checked + label:after {
     top: 0px;
     left: 1px;
     content: '\f00c';
@@ -204,6 +200,9 @@ a.navbar-brand {
     position: absolute;
 }
 
+tbody tr.selected td {
+    background-color: #B3E5FC;
+}
 
 
 
@@ -348,4 +347,11 @@ a.navbar-brand {
 span.profile-usertitle-name, span.profile-usertitle-job{
     display: block;
     margin-bottom: 7px;
+}
+
+
+/* FOOTER */
+footer{
+    height: 117px;
+    background-color: #1b4f72;
 }
