@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}¡Bienvenido a MIND!{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap4/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('bootstrap4/css/flatly.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap-4-dashboard/css/style.css') }}">
+    {#<link rel="stylesheet" href="{{ asset('bootstrap4/css/flatly.min.css') }}">#}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -21,8 +22,23 @@
 </head>
 <body>
     {% block body %}{% endblock %}
+    <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('jQuery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('bootstrap4/js/bootstrap.js') }}"></script>
+
     {% block javascripts %}{% endblock %}
+    <script>
+        window.onload = function () {
+            var chart1 = document.getElementById("line-chart").getContext("2d");
+            window.myLine = new Chart(chart1).Line(lineChartData, {
+                responsive: true,
+                scaleLineColor: "rgba(0,0,0,.2)",
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+                scaleFontColor: "#c5c7cc"
+            });
+        };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 </body>
 </html>

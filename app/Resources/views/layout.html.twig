@@ -2,39 +2,26 @@
 
 {% block body %}
     {% set ruta = app.request.get('_route') %}
+    <div class="container-fluid" id="wrapper">
+        <div class="row">
     {% block navbar %}
-        <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">
-                    <i class="fa fa-eercast"></i>
-                    MIND
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item {% if ruta == 'inicio' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('inicio') }}">
-                                <i class="fa fa-home"></i>
-                                Inicio
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {% if ruta == 'ayuda' %}active{% endif %}">
-                            <a class="nav-link" href="#">Ayuda</a>
-                        </li>
-                        <li class="nav-item {% if ruta == 'contacto' %}active{% endif %}">
-                            <a class="nav-link" href="#">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    {% endblock %}
+        <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2 bg-faded sidebar-style-1">
+            <h1 class="site-title"><a href="index.html"><em class="fa fa-rocket"></em> Brand.name</a></h1>
 
-    <section class="container-fluid" style="margin: 0; padding: 0;">
-        {% if app.session.flashBag.has('estado') %}
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
+
+            <ul class="nav nav-pills flex-column sidebar-nav">
+                <li class="nav-item"><a class="nav-link active" href="index.html"><em class="fa fa-dashboard"></em> Dashboard <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="widgets.html"><em class="fa fa-calendar-o"></em> Widgets</a></li>
+                <li class="nav-item"><a class="nav-link" href="charts.html"><em class="fa fa-bar-chart"></em> Charts</a></li>
+                <li class="nav-item"><a class="nav-link" href="elements.html"><em class="fa fa-hand-o-up"></em> UI Elements</a></li>
+                <li class="nav-item"><a class="nav-link" href="cards.html"><em class="fa fa-clone"></em> Cards</a></li>
+            </ul>
+
+            <a href="#" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+        </nav>
+    {% endblock %}
+        <main class="col-xs-12 col-sm-8 offset-sm-4 col-lg-9 offset-lg-3 col-xl-10 offset-xl-2 pt-3 pl-4">        {% if app.session.flashBag.has('estado') %}
             {% set mensajes = app.session.flashBag.get('estado') %}
             {% for mensaje in mensajes %}
                 <div class="alert alert-success alert-dismissible">
@@ -54,8 +41,10 @@
         {% endif %}
 
         {% block content %}{% endblock %}
-    </section>
-    <footer>
+        </main>
+        <footer>
 
-    </footer>
+        </footer>
+            </div>
+        </div>
 {% endblock %}
