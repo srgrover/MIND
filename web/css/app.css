@@ -45,10 +45,6 @@ a.navbar-brand {
     border: 1px solid #00A653;
 }
 
-
-
-
-
 /*TABLE SCROLL*/
 .points_table table {
     padding: 0;
@@ -129,11 +125,37 @@ a.navbar-brand {
     background-image: -webkit-linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4) 50%, transparent, transparent)
 }
 
+.created-at{
+    font-size: smaller;
+}
 
+.card-title{
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
 
+.btn.btn-sm.btn-subtle.text-success:hover{
+    background-color: #28a745;
+    color: #eeeeee !important;
+}
 
+.btn.btn-sm.btn-subtle.text-success:focus{
+    background-color: #068523;
+    color: #ffffff !important;
+}
 
+a.btn.btn-sm.btn-danger{
+    color: #ffffff;
+}
 
+a.btn.btn-sm.btn-danger:hover{
+    background-color: #ba1323;
+}
+
+.delModal{
+    background-color: #ba1323;
+    color: #ffffff;
+}
 
 /*STARS*/
 .star {
@@ -175,29 +197,38 @@ a.navbar-brand {
     cursor: pointer;
 }
 .ckbox label:before, .ckbox-all label:before {
-    content: '';
-    top: 7px;
-    left: 0;
-    width: 18px;
-    height: 18px;
-    display: block;
-    position: absolute;
-    border-radius: 2px;
-    border: 1px solid #bbb;
-    background-color: #fff;
+     content: '';
+     top: 7px;
+     left: 0;
+     width: 18px;
+     height: 18px;
+     display: block;
+     position: absolute;
+     border-radius: 2px;
+     border: 1px solid #bbb;
+     background-color: #fff;
+ }
+
+.ckbox-all label:before {
+    top: 25px;
 }
+
 .ckbox input[type="checkbox"]:checked + label:before, .ckbox-all input[type="checkbox"]:checked + label:before {
     border-color: #2BBCDE;
     background-color: #2BBCDE;
 }
 .ckbox input[type="checkbox"]:checked + label:after, .ckbox-all input[type="checkbox"]:checked + label:after {
-    top: 0px;
+    top: 4px;
     left: 1px;
     content: '\f00c';
     color: #fff;
     font-size: 16px;
     font-family: 'FontAwesome';
     position: absolute;
+}
+
+.ckbox-all input[type="checkbox"]:checked + label:after {
+    top: 21px;
 }
 
 tbody tr.selected td {
