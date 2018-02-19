@@ -1,28 +1,301 @@
 {% extends 'layout.html.twig' %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/favoritos.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        var URL = "{{ app.request.getSchemeAndHttpHost() }}";
+    </script>
 {% endblock %}
 
 {% block content %}
-    <div class="col-lg-6 box-form box-default">
-        <h1>Nuevo objeto a recordar</h1>
-        <hr />
-        {{ form_start(formulario) }}
-        {{ form_widget(formulario) }}
-        <div class="form-group">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-10">
-                <a href="{{ path('inicio') }}" class="btn btn-primary">
-                    <i class="fa fa-long-arrow-left"></i>
-                    Volver al perfil
+    <header class="page-header row justify-center">
+        <div class="col-md-6 col-lg-8">
+            <h1 class="float-left text-center text-md-left">MIND</h1>
+        </div>
+
+        <div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
+            <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if app.user.imagenPerfil == null %}
+                    <img src="{{ asset('images/users-profiles/profile-default.png') }}" class="circle float-left profile-photo" alt="foto de perfil" width="50" height="auto">
+                {% else %}
+                    <img src="{{ asset('images/users-profiles/'~app.user.imagenPerfil) }}" alt="foto de perfil">
+                {% endif %}
+
+                <div class="username mt-1">
+                    <h4 class="mb-1">{{ app.user.name }} {{ app.user.apellidos }}</h4>
+                    <h6 class="text-muted">{{ app.user.email }}</h6>
+                </div>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">
+                    <em class="fa fa-user-circle mr-1"></em>
+                    Perfil
                 </a>
-                <button type="submit" name="enviar" class="btn btn-success">
-                    <i class="fa fa-check"></i>
-                    Guardar
-                </button>
+                <a class="dropdown-item" href="#">
+                    <em class="fa fa-sliders mr-1"></em>
+                    Ajustes
+                </a>
+                <a class="dropdown-item text-danger" href="{{ path('fos_user_security_logout') }}">
+                    <em class="fa fa-power-off mr-1"></em>
+                    Salir
+                </a>
             </div>
         </div>
-        {{ form_end(formulario) }}
-    </div>
+
+        <div class="clear"></div>
+    </header>
+
+    <section class="row">
+        <div class="col-sm-12">
+            <section class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="card mb-4 border-success">
+                        <div class="card-block">
+                            <h3 class="card-title bg-success">Nuevo Objeto</h3>
+                            {{ form_start(formulario) }}
+                            <div class="dropdown card-title-btn-container">
+                                <button type="submit" name="enviar" class="btn btn-sm btn-subtle text-success">
+                                    <i class="fa fa-plus text-success"></i>
+                                    Agregar
+                                </button>
+
+                                <a href="{{ path('inicio') }}" class="btn btn-sm btn-subtle text-danger" type="button">
+                                    <em class="fa fa-times-circle "></em>
+                                    Cancelar
+                                </a>
+                            </div>
+
+
+                            <div class="table-responsive">
+                                <table class="table table-stripped">
+                                    <tbody class="points_table_scrollbar row-add">
+                                        <tr>
+                                            <td>
+                                                <em class="fa fa-plus"></em>
+                                            </td>
+                                            <td class="col-xs-3 col-md-3 col-lg-4">
+                                                {{ form_row(formulario.nombre) }}
+                                            </td>
+                                            <td class="col-xs-3 col-md-4 col-lg-4">
+                                                {{ form_row(formulario.ubicacion) }}
+                                            </td>
+                                            <td class="col-xs-2 col-md-2 col-lg-5">
+                                                Creado el {{ fecha_at|localizeddate('medium', 'none', 'es') }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{ form_end(formulario) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-block">
+                            <h3 class="card-title">Top Users</h3>
+
+                            <h6 class="card-subtitle mb-2 text-muted">Most active this week</h6>
+
+                            <div class="user-progress justify-center">
+                                <div class="col-sm-3 col-md-2" style="padding: 0;">
+                                    <img src="images/profile-pic.jpg" alt="profile photo" class="circle profile-photo"
+                                         style="width: 100%; max-width: 100px;">
+                                </div>
+
+                                <div class="col-sm-6 col-md-8">
+                                    <h6 class="pt-1">Username 1</h6>
+
+                                    <div class="progress progress-custom">
+                                        <div class="progress-bar bg-primary" style="width: 75%" role="progressbar"
+                                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-2">
+                                    <div class="progress-label">75%</div>
+                                </div>
+                            </div>
+
+                            <div class="user-progress justify-center">
+                                <div class="col-sm-3 col-md-2" style="padding: 0;">
+                                    <img src="images/profile-pic.jpg" alt="profile photo" class="circle profile-photo"
+                                         style="width: 100%; max-width: 100px;">
+                                </div>
+
+                                <div class="col-sm-6 col-md-8">
+                                    <h6 class="pt-1">Username 2</h6>
+
+                                    <div class="progress progress-custom">
+                                        <div class="progress-bar bg-primary" style="width: 50%" role="progressbar"
+                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-2">
+                                    <div class="progress-label">50%</div>
+                                </div>
+                            </div>
+
+                            <div class="user-progress justify-center">
+                                <div class="col-sm-3 col-md-2" style="padding: 0;">
+                                    <img src="images/profile-pic.jpg" alt="profile photo" class="circle profile-photo"
+                                         style="width: 100%; max-width: 100px;">
+                                </div>
+
+                                <div class="col-sm-6 col-md-8">
+                                    <h6 class="pt-1">Username 3</h6>
+
+                                    <div class="progress progress-custom">
+                                        <div class="progress-bar bg-primary" style="width: 25%" role="progressbar"
+                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-2">
+                                    <div class="progress-label">25%</div>
+                                </div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div id="calendar"></div>
+
+                            <div class="divider"></div>
+
+                            <h3 class="card-title">Timeline</h3>
+
+                            <h6 class="card-subtitle mb-2 text-muted">What's coming up</h6>
+
+                            <ul class="timeline">
+                                <li>
+                                    <div class="timeline-badge"><em class="fa fa-camera"></em></div>
+
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h5 class="timeline-title mt-2">Lorem ipsum</h5>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="timeline-badge primary"><em class="fa fa-link"></em></div>
+
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h5 class="timeline-title mt-2">Dolor</h5>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="timeline-badge"><em class="fa fa-paperclip"></em></div>
+
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h5 class="timeline-title mt-2">Sit amet</h5>
+                                        </div>
+
+                                        <div class="timeline-body">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-block">
+                            <h3 class="card-title">Todo List</h3>
+
+                            <div class="dropdown card-title-btn-container">
+                                <button class="btn btn-sm btn-subtle dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em
+                                            class="fa fa-cog"></em></button>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a
+                                            class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
+                                    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
+                                    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close
+                                        Window</a></div>
+                            </div>
+
+                            <h6 class="card-subtitle mb-2 text-muted">A simple checklist</h6>
+
+                            <ul class="todo-list mt-2">
+                                <li class="todo-list-item">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="checkbox-1"/>
+
+                                        <label for="checkbox-1">Make coffee</label>
+
+                                        <div class="float-right action-buttons"><a href="#" class="trash"><em
+                                                        class="fa fa-trash"></em></a></div>
+                                    </div>
+                                </li>
+                                <li class="todo-list-item">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="checkbox-2"/>
+
+                                        <label for="checkbox-2">Check emails</label>
+
+                                        <div class="float-right action-buttons"><a href="#" class="trash"><em
+                                                        class="fa fa-trash"></em></a></div>
+                                    </div>
+                                </li>
+                                <li class="todo-list-item">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="checkbox-3"/>
+
+                                        <label for="checkbox-3">Reply to Jane</label>
+
+                                        <div class="float-right action-buttons"><a href="#" class="trash"><em
+                                                        class="fa fa-trash"></em></a></div>
+                                    </div>
+                                </li>
+                                <li class="todo-list-item">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="checkbox-4"/>
+
+                                        <label for="checkbox-4">Work on the new design</label>
+
+                                        <div class="float-right action-buttons"><a href="#" class="trash"><em
+                                                        class="fa fa-trash"></em></a></div>
+                                    </div>
+                                </li>
+                                <li class="todo-list-item">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="checkbox-5"/>
+
+                                        <label for="checkbox-5">Get feedback</label>
+
+                                        <div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="card-footer todo-list-footer">
+                                <div class="input-group">
+                                    <input id="btn-input" type="text" class="form-control input-md" placeholder="Add new task"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary btn-md" id="btn-todo">Add</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
 {% endblock %}

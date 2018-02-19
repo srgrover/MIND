@@ -46,9 +46,8 @@ class DefaultController extends Controller
         //$usuario = $this->getUser();
         $objetos_repo = $em->getRepository('AppBundle:Objeto');
         $query = $objetos_repo->createQueryBuilder('p')
-            //->where('p.id = (:user_id)')
-            //->setParameter('user_id', $usuario->getId())
-            ->orderBy('p.fecha', 'DESC')
+            ->orderBy('p.favorito', 'DESC')
+            ->addOrderBy('p.fecha', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -64,6 +63,8 @@ class DefaultController extends Controller
      * @throws \Doctrine\ORM\OptimisticLockException* @internal param Rutina|null $rutina
      */
     public function addObjetoAction(Request $request, Objeto $objeto = null){
+        $fecha_at = new \Datetime("now");
+
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $usuario = $this->getUser();
@@ -71,7 +72,7 @@ class DefaultController extends Controller
             $objeto = new Objeto();
             $em->persist($objeto);
             $objeto->setUsuario($usuario);
-            $objeto->setFecha(new \Datetime("now"));
+            $objeto->setFecha($fecha_at);
         }
         $form = $this->createForm(ObjetoFormType::class, $objeto);
         $form->handleRequest($request);
@@ -112,6 +113,7 @@ class DefaultController extends Controller
         }
         return $this->render('Objeto/objeto.html.twig', [
             'formulario' => $form->createView(),
+            'fecha_at' => $fecha_at
         ]);
     }
 

@@ -17,9 +17,9 @@
         <div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {% if app.user.imagenPerfil == null %}
-                <img src="{{ asset('images/users-profiles/profile-default.png') }}" class="circle float-left profile-photo" alt="foto de perfil" width="50" height="auto">
+                    <img src="{{ asset('images/users-profiles/profile-default.png') }}" class="circle float-left profile-photo" alt="foto de perfil" width="50" height="auto">
                 {% else %}
-                <img src="{{ asset('images/users-profiles/'~app.user.imagenPerfil) }}" alt="foto de perfil">
+                    <img src="{{ asset('images/users-profiles/'~app.user.imagenPerfil) }}" alt="foto de perfil">
                 {% endif %}
 
                 <div class="username mt-1">
@@ -56,31 +56,10 @@
                             <h3 class="card-title">Objetos guardados</h3>
 
                             <div class="dropdown card-title-btn-container">
-                                <button href="#" class="btn btn-sm btn-subtle text-success" type="button" data-toggle="modal" data-target="#ModalAgregar">
+                                <a href="{{ path('add_objeto') }}" class="btn btn-sm btn-subtle text-success">
                                     <em class="fa fa-plus"></em>
                                     Agregar nuevo
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalEliminarLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
 
                                 <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#ModalEliminar" disabled>
                                     <em class="fa fa-trash"></em>
@@ -107,7 +86,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="table-responsive">
@@ -123,18 +101,15 @@
                                         <th>
                                             {% set fv = true %}
                                             <button id="todos-star" class="star
-                                {% for obj in objetos %}
-                                {% if obj.usuario == app.user %}
-                                {% if not obj.favorito %}
-                                {% set fv = false %}
-                                {% endif %}
-                                {% endif %}
-
-                                {% if fv %}
-                                star-checked
-                                {% endif %}
-                                {% endfor %}
-                                ">
+                                            {% for obj in objetos %}
+                                                {% if obj.usuario == app.user %}
+                                                    {% if not obj.favorito %}
+                                                        {% set fv = false %}
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if fv %}star-checked{% endif %}
+                                            {% endfor %}
+                                            ">
                                                 <i class="fa fa-star"></i>
                                             </button>
                                         </th>
@@ -218,7 +193,6 @@
                                                             <div class="modal-body">
                                                                 <p>¿Estás seguro de que quieres eliminar permanentemente el objeto "{{ objeto.nombre }}"?</p>
                                                                 <small>Esta acción no tendrá vuelta atrás. Pulsa el botón "Eliminar" si estás de acuerdo. De lo contrario pulsa cancelar para volver al inicio.</small>
-
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -244,67 +218,6 @@
                                     {% endfor %}
                                     </tbody>
                                 </table>
-
-
-
-
-
-
-                                {#<table class="table table-striped">#}
-                                    {#<thead>#}
-                                    {#<tr>#}
-                                        {#<th>Order #</th>#}
-
-                                        {#<th>Product</th>#}
-
-                                        {#<th>Customer</th>#}
-
-                                        {#<th>Status</th>#}
-                                    {#</tr>#}
-                                    {#</thead>#}
-
-                                    {#<tbody>#}
-                                    {#<tr>#}
-                                        {#<td>0001</td>#}
-
-                                        {#<td>Product Name 1</td>#}
-
-                                        {#<td>Customer 1</td>#}
-
-                                        {#<td>Complete</td>#}
-                                    {#</tr>#}
-
-                                    {#<tr>#}
-                                        {#<td>0002</td>#}
-
-                                        {#<td>Product Name 2</td>#}
-
-                                        {#<td>Customer 2</td>#}
-
-                                        {#<td>Complete</td>#}
-                                    {#</tr>#}
-
-                                    {#<tr>#}
-                                        {#<td>0003</td>#}
-
-                                        {#<td>Product Name 3</td>#}
-
-                                        {#<td>Customer 3</td>#}
-
-                                        {#<td>Processing</td>#}
-                                    {#</tr>#}
-
-                                    {#<tr>#}
-                                        {#<td>0004</td>#}
-
-                                        {#<td>Product Name 4</td>#}
-
-                                        {#<td>Customer 4</td>#}
-
-                                        {#<td>Pending</td>#}
-                                    {#</tr>#}
-                                    {#</tbody>#}
-                                {#</table>#}
                             </div>
                         </div>
                     </div>

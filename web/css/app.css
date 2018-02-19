@@ -10,13 +10,32 @@ a.navbar-brand {
     left: 50%;
     position: absolute;
     padding: 0;
-    font: normal 50px/60px 'Nanum Pen Script', sans-serif;
     color: #FFFFFF;
     margin-top: 4px;
 }
 
-.bg-dark{
-    background-color: #1FC8E3 !important;
+/* NAV */
+.sidebar{
+    background: linear-gradient(#2196F3 , #43b8F5) !important;
+}
+
+.nav-pills .nav-link.active, .badge-primary[href]:focus, .badge-primary[href]:hover, a.bg-primary:focus, a.bg-primary:hover {
+    background-color: #0074d1 !important;
+}
+
+.sidebar a:focus, .sidebar a:visited, .sidebar a:hover, .sidebar a:active {
+    background-color: #0074d1 !important;
+}
+
+    /* BRAND */
+.sidebar .site-title a {
+    font-size: 2.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    font-family: 'Nanum Pen Script', cursive;
 }
 
 /* CONTENT */
@@ -157,6 +176,34 @@ a.btn.btn-sm.btn-danger:hover{
     color: #ffffff;
 }
 
+/* AÑADIR OBJETO */
+.points_table_scrollbar.row-add {
+    height: auto;
+}
+
+.points_table_scrollbar.row-add input[type="text"] {
+    border-radius: 3px;
+    border: 1px solid #BBBBBB;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.points_table_scrollbar.row-add em {
+    padding-top: 10px;
+    padding-left: 5px;
+    color: #28a745;
+}
+
+.card-title.bg-success{
+    padding: 1rem;
+    margin: 0;
+    color: #ffffff;
+}
+
+.border-success{
+    border: 1px solid #28a745 !important;
+}
+
 /*STARS*/
 .star {
     color: #ccc;
@@ -196,6 +243,11 @@ a.btn.btn-sm.btn-danger:hover{
     user-select: none;
     cursor: pointer;
 }
+
+.ckbox-all{
+    display: inline-block;
+}
+
 .ckbox label:before, .ckbox-all label:before {
      content: '';
      top: 7px;
@@ -209,8 +261,12 @@ a.btn.btn-sm.btn-danger:hover{
      background-color: #fff;
  }
 
-.ckbox-all label:before {
-    top: 25px;
+.ckbox-all label::before {
+    top: 15px;
+}
+
+.ckbox-all input[type="checkbox"] {
+    display: block;
 }
 
 .ckbox input[type="checkbox"]:checked + label:before, .ckbox-all input[type="checkbox"]:checked + label:before {
@@ -227,8 +283,8 @@ a.btn.btn-sm.btn-danger:hover{
     position: absolute;
 }
 
-.ckbox-all input[type="checkbox"]:checked + label:after {
-    top: 21px;
+.ckbox-all input[type="checkbox"]:checked + label::after {
+    top: 12px;
 }
 
 tbody tr.selected td {

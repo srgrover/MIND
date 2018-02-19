@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    comprobarFav();
+
     //MARCAR/DESMARCAR TODOS LOS CHECKBOX
     $('input#check-all').change(function () {
         $('input:checkbox').prop('checked', $(this).prop("checked"));
@@ -51,3 +53,14 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function comprobarFav() {
+    $('.star').each(function () {
+        if(!$(this).hasClass('star-checked')){
+
+        }
+        $('#todos-star').removeClass('star-checked');
+        return false
+    });
+}
