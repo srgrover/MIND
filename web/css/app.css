@@ -1,17 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
 
-/* CENTAR LOGO */
 body, html{
     font-family: Roboto, sans-serif;
-}
-
-a.navbar-brand {
-    transform: translateX(-50%);
-    left: 50%;
-    position: absolute;
-    padding: 0;
-    color: #FFFFFF;
-    margin-top: 4px;
 }
 
 /* NAV */
@@ -171,8 +161,8 @@ a.btn.btn-sm.btn-danger:hover{
     background-color: #ba1323;
 }
 
-.delModal{
-    background-color: #ba1323;
+.delModal .modal-header{
+    background: linear-gradient(to right, #f50057 , #e91e63);
     color: #ffffff;
 }
 
@@ -195,14 +185,42 @@ a.btn.btn-sm.btn-danger:hover{
 }
 
 .card-title.bg-success{
+    background: linear-gradient(to right, #28a745 , #39b856);
+    padding: 1rem;
+    margin: 0;
+    color: #ffffff;
+}
+
+.card-title.bg-info{
+    background: linear-gradient(to right, #2196F3 , #43b8F5);
     padding: 1rem;
     margin: 0;
     color: #ffffff;
 }
 
 .border-success{
-    border: 1px solid #28a745 !important;
+    border: 1px solid #39b856 !important;
 }
+
+a.text-danger:hover{
+    background-color: #dc3545 ;
+    color: #FFFFFF !important;
+}
+
+a.text-danger:focus{
+    background-color: #cb2434 ;
+    color: #FFFFFF !important;
+}
+
+button.text-success:hover{
+    color: #FFFFFF !important;
+}
+
+.sp-creado{
+    color: #777777;
+    font-size: 15px;
+}
+
 
 /*STARS*/
 .star {
@@ -292,8 +310,17 @@ tbody tr.selected td {
 }
 
 
+/*** BOOTSTRAP EDIT ***/
+.alert-success {
+    background-color: #41c59b;
+    border-color: #38a783;
+}
 
-
+.btn-subtle:hover, .btn-subtle:focus, .btn-subtle:active {
+    color: #fff !important;
+    background-color: #2196F3;
+    outline: none;
+}
 
 
 

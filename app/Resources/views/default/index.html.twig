@@ -151,30 +151,9 @@
                                                 <span class="created-at">{{ objeto.fecha|localizeddate('medium', 'none', 'es') }}</span>
                                             </td>
                                             <td>
-                                                <a href="#" data-toggle="modal" data-target="#editModal{{ objeto.id }}">
+                                                <a href="{{ path('editar_objeto', {'id' : objeto.id}) }}">
                                                     <em class="fa fa-edit"></em>
                                                 </a>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="editModal{{ objeto.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalEliminarLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Editar {{ objeto.nombre }}</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                ...
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                <button type="button" class="btn btn-primary">Guardar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
                                                 <a href="#" data-toggle="modal" data-target="#delModal{{ objeto.id }}">
                                                     <em class="fa fa-trash text-danger"></em>
@@ -185,7 +164,7 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content delModal">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar {{ objeto.nombre }}</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar el objeto {{ objeto.nombre }}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -196,7 +175,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                <a type="button" class="btn btn-primary">
+                                                                <a href="{{ path('confirmar_borrar_objeto', {'id' : objeto.id}) }}" type="button" class="btn btn-danger text-white">
                                                                     <em class="fa fa-trash"></em>
                                                                     Eliminar
                                                                 </a>

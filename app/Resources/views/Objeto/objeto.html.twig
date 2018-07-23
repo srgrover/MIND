@@ -9,6 +9,8 @@
 {% endblock %}
 
 {% block content %}
+    {% set ruta = app.request.get('_route') %}
+
     <header class="page-header row justify-center">
         <div class="col-md-6 col-lg-8">
             <h1 class="float-left text-center text-md-left">MIND</h1>
@@ -51,14 +53,22 @@
         <div class="col-sm-12">
             <section class="row">
                 <div class="col-md-12 col-lg-8">
-                    <div class="card mb-4 border-success">
+                    <div class="card mb-4 border-{% if ruta == 'editar_objeto' %}info{% else %}success{% endif %}">
                         <div class="card-block">
-                            <h3 class="card-title bg-success">Nuevo Objeto</h3>
+                            <h3 class="card-title bg-{% if ruta == 'editar_objeto' %}info{% else %}success{% endif %}">
+                                {% if ruta == 'editar_objeto' %}Editar{% else %}Nuevo{% endif %} Objeto
+                            </h3>
                             {{ form_start(formulario) }}
                             <div class="dropdown card-title-btn-container">
-                                <button type="submit" name="enviar" class="btn btn-sm btn-subtle text-success">
-                                    <i class="fa fa-plus text-success"></i>
-                                    Agregar
+                                <button type="submit" name="enviar" class="btn btn-sm btn-subtle text-{% if ruta == 'editar_objeto' %}info{% else %}success{% endif %}">
+
+                                    {% if ruta == 'editar_objeto' %}
+                                        <i class="fa fa-pencil"></i>
+                                        Editar
+                                    {% else %}
+                                        <i class="fa fa-plus"></i>
+                                        Agregar
+                                    {% endif %}
                                 </button>
 
                                 <a href="{{ path('inicio') }}" class="btn btn-sm btn-subtle text-danger" type="button">
@@ -67,13 +77,16 @@
                                 </a>
                             </div>
 
-
                             <div class="table-responsive">
                                 <table class="table table-stripped">
                                     <tbody class="points_table_scrollbar row-add">
                                         <tr>
                                             <td>
-                                                <em class="fa fa-plus"></em>
+                                                {% if ruta == 'editar_objeto' %}
+                                                    <em class="fa fa-pencil text-info"></em>
+                                                {% else %}
+                                                    <em class="fa fa-plus"></em>
+                                                {% endif %}
                                             </td>
                                             <td class="col-xs-3 col-md-3 col-lg-4">
                                                 {{ form_row(formulario.nombre) }}
@@ -82,7 +95,7 @@
                                                 {{ form_row(formulario.ubicacion) }}
                                             </td>
                                             <td class="col-xs-2 col-md-2 col-lg-5">
-                                                Creado el {{ fecha_at|localizeddate('medium', 'none', 'es') }}
+                                                <span class="sp-creado"> {% if ruta == 'editar_objeto' %}Modificado el {% else %} Creado el {% endif %} {{ fecha_at|localizeddate('medium', 'none', 'es') }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -165,52 +178,6 @@
                             <div id="calendar"></div>
 
                             <div class="divider"></div>
-
-                            <h3 class="card-title">Timeline</h3>
-
-                            <h6 class="card-subtitle mb-2 text-muted">What's coming up</h6>
-
-                            <ul class="timeline">
-                                <li>
-                                    <div class="timeline-badge"><em class="fa fa-camera"></em></div>
-
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h5 class="timeline-title mt-2">Lorem ipsum</h5>
-                                        </div>
-
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge primary"><em class="fa fa-link"></em></div>
-
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h5 class="timeline-title mt-2">Dolor</h5>
-                                        </div>
-
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge"><em class="fa fa-paperclip"></em></div>
-
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h5 class="timeline-title mt-2">Sit amet</h5>
-                                        </div>
-
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
 

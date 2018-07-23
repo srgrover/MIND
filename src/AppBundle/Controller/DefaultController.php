@@ -10,15 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
-{
+class DefaultController extends Controller{
     /**
      * @Route("/", name="entrar")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function entrarAction(Request $request)
-    {
+    public function entrarAction(Request $request){
         //Si el usuario está logueado se redirecciona a la página principal
         if(is_object($this->getUser())){
             return $this->redirect('inicio');
@@ -28,12 +26,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/presentacion", name="presentacion")
+     */
+    public function landingAction(Request $request){
+        return $this->render('landing/landing.html.twig');
+    }
+
+    /**
      * @Route("/inicio", name="inicio")
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request){
         $objetos = $this->getObjetos($request);
-
 
         return $this->render('default/index.html.twig',[
             'objetos' => $objetos
@@ -46,6 +49,7 @@ class DefaultController extends Controller
         //$usuario = $this->getUser();
         $objetos_repo = $em->getRepository('AppBundle:Objeto');
         $query = $objetos_repo->createQueryBuilder('p')
+            ->where('p.activo = true')
             ->orderBy('p.favorito', 'DESC')
             ->addOrderBy('p.fecha', 'DESC')
             ->getQuery()
@@ -76,6 +80,7 @@ class DefaultController extends Controller
         }
         $form = $this->createForm(ObjetoFormType::class, $objeto);
         $form->handleRequest($request);
+
         if($form->isSubmitted()) {
             if ($form->isValid()) {
                 if($objeto->getUsuario()->getId() == $usuario->getId() || $this->getUser()->isAdmin()) {
@@ -170,5 +175,25 @@ class DefaultController extends Controller
             $this->addFlash('error', 'Hubo algún problema al procesar la petición');
         }
         die();
+    }
+
+    /**
+     * @Route("/eliminar/objeto/{id}", name="confirmar_borrar_objeto", methods={"GET"})
+     * @param Objeto $objeto
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function borrarDeVerdadAction(Objeto $objeto){
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        try {
+            $em->remove($objeto);
+            $em->flush();
+            $this->addFlash('estado', 'El objeto se ha eliminado con éxito');
+        }
+        catch(Exception $e) {
+            $this->addFlash('error', 'Hubo algún error. No se ha podido eliminar el objeto');
+        }
+        return $this->redirect($this->generateUrl('inicio'));
     }
 }

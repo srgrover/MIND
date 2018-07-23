@@ -51,6 +51,13 @@ class Objeto {
     protected $fecha;
 
     /**
+     * @ORM\Column(type="boolean", nullable=false)
+     *
+     * @var boolean
+     */
+    protected $activo = 1;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Usuario", inversedBy="objetos")
      *
      * @var Usuario
@@ -151,6 +158,22 @@ class Objeto {
     public function setUsuario($usuario)
     {
         $this->usuario = $usuario;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * @param bool $activo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
     }
 
 }
